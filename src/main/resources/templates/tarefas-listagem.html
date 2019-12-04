@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="ls-theme-indigo ls-html-nobg  ls-browser-chrome ls-window-md ls-screen-lg" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="form-validation.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+    <link href="http://assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css" rel="stylesheet"
+          type="text/css">
+    <link rel="icon" sizes="192x192" href="/locawebstyle/assets/images/ico-boilerplate.png">
+    <link rel="apple-touch-icon" href="/locawebstyle/assets/images/ico-boilerplate.png">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<main class="ls-main ">
+    <div class="container-fluid">
+
+        <div class="ls-box ls-board-box">
+            <header class="ls-info-header">
+                <h2 class="ls-title-3">Tarefas - TODO List</h2>
+            </header>
+
+            <table class="ls-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Responsável</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="tarefa : ${tarefas}">
+                    <tr>
+                        <td th:text="${tarefa.id}"></td>
+                        <td th:text="${tarefa.nome}"></td>
+                        <td th:text="${tarefa.responsavel}"></td>
+                        <td><a th:href="@{'/tarefas/alterar/' + ${tarefa.id}}" class="ls-btn-primary">Alterar</a>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+<script>
+    function deleteItem(id){
+        if(confirm('Tem certeza que deseja excluir este usuário?')){
+            $.ajax({
+                url: '/user/delete/' + id,
+                type: 'DELETE',
+                success: function(result) {
+                    console.debug(" DEU RELOAD " + result);
+                    location.reload();
+                },
+                error: function(e){
+                    location.reload();
+                }
+            });
+        }else{
+
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
